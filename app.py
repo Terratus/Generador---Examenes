@@ -13,8 +13,7 @@ from reportlab.lib.utils import simpleSplit
 # --- 1. CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="ExamenMatic AI", page_icon="🧠", layout="centered")
 
-# --- 2. AUTENTICACIÓN ---
-# Cargar configuración
+# --- 2. AUTENTICACIÓN (VERSIÓN 0.2.3) ---
 try:
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
@@ -22,6 +21,7 @@ except FileNotFoundError:
     st.error("Error: No se encontró el archivo config.yaml")
     st.stop()
 
+# Inicializamos el autenticador
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
@@ -30,13 +30,13 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-# Widget de Login
-name, authentication_status, username = authenticator.login('main')
+# Widget de Login (Corrección: En esta versión se piden 2 textos)
+name, authentication_status, username = authenticator.login('Iniciar Sesión', 'main')
 
 if authentication_status is False:
     st.error('Usuario o contraseña incorrectos')
 elif authentication_status is None:
-    st.warning('Por favor, ingresa tus credenciales para acceder.')
+    st.warning('Por favor, ingresa tus credenciales')
 
 elif authentication_status is True:
     # =======================================================
@@ -56,9 +56,8 @@ elif authentication_status is True:
         authenticator.logout('Cerrar Sesión', 'sidebar')
         st.divider()
         
-        # Logo
         try: st.image("logo.png", width=200)
-        except: st.header("🤖 Terratus")
+        except: st.header("🤖 ExamenMatic")
         
         st.subheader("Configuración")
         api_key = st.text_input("🔑 API Key Google:", type="password")
@@ -109,7 +108,7 @@ elif authentication_status is True:
     def generate_quiz(text, api_key, num, level):
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('gemini-3-pro-preview')
             prompt = f"""
             Actúa como profesor experto.
             1. Crea {num} preguntas de nivel {level} sobre el texto. NO marques la respuesta correcta aquí.
@@ -172,5 +171,5 @@ elif authentication_status is True:
         st.warning("AIzaSyB01nF2UTVfNJGRK90khuE51mG2BQcUCsI")
 
     # --- PIE DE PÁGINA ---
-    st.markdown("Charles J. Martín M. Arredondo")
-    st.markdown("<center><small>Desarrollado con ❤️ y Gemini AI</small></center>", unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown("<center><small>Desarrollado por Charles J. Martín M. Arredondo y Gemini AI</small></center>", unsafe_allow_html=True)
