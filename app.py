@@ -108,7 +108,7 @@ elif authentication_status is True:
     def generate_quiz(text, api_key, num, level):
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-3-pro-preview')
+            model = genai.GenerativeModel('gemini-2.5-pro')
             prompt = f"""
             Actúa como profesor experto.
             1. Crea {num} preguntas de nivel {level} sobre el texto. NO marques la respuesta correcta aquí.
@@ -168,7 +168,7 @@ elif authentication_status is True:
                     st.warning("El documento tiene muy poco texto.")
 
     elif uploaded_file and not api_key:
-        st.warning("AIzaSyB01nF2UTVfNJGRK90khuE51mG2BQcUCsI")
+        st.warning("AIzaSyBINbGhxofmmu8NKI8sssEq8C9EhWERT7A")
 
     # --- PIE DE PÁGINA ---
     st.markdown("---")

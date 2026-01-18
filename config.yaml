@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 30
+  key: random_signature_key
+  name: login_cookie
+credentials:
+  usernames:
+    admin:
+      email: admin@test.com
+      name: Administrador
+      password: $2b$12$B3R869atlt2GLC8/F1CwUOMevioPHVB5.x49Jx5oJQEPeeuwhew..
+preauthorized:
+  emails:
+  - test@gmail.com
