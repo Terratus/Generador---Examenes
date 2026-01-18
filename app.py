@@ -181,4 +181,5 @@ if uploaded_file:
 
     # --- PIE DE PÁGINA ---
     st.markdown("---")
+
     st.markdown("<center><small>Desarrollado por Charles J. Martín M. Arredondo - 2026</small></center>", unsafe_allow_html=True)
