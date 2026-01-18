@@ -1,7 +1,0 @@
-streamlit
-google-generativeai
-PyPDF2
-python-docx
-reportlab
-streamlit-authenticator==0.2.3
-PyYAML
